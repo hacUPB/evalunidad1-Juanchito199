@@ -4,17 +4,15 @@
 
 (INICIO)
 
-@KBD
-
+ @KBD
 
  D=M
  @84 //(t)
  D=D-A
- @Linea1
+ @LINEA1
  D;JEQ
  
-@KBD
-
+ @KBD
 
  D=M
  @67 //(c)
@@ -22,137 +20,112 @@
  @Borrar
  D;JEQ
 
-@KBD
 
-
- D=M
- @84 //(t)
- D=D-A 
- @Linea2
- D;JEQ
  
 @INICIO
  0;JMP
 
-(Linea1)
+(LINEA1)
 
-
-@16400    
-           
+ @16400        
  D=A
-
-@Var
+ @Var
  M=D 
-
-@256
+ @256
  D=A
-
-@contador
+ @contador
  M=D
-
-@32
+ @256
  D=A 
-
-@salto
+ @color
  M=D
-
-@color
-M = 1
- 
- @VARI
+ @32
+ D=A
+ @salto
+ M=D
+ @bool
+ M = 0 
+ @VARR
  0;JMP
 
+(LINEA2)
+
+  @20480                
+  D=A
+  @Var
+  M=D 
+  @32
+  D=A
+  @contador
+  M=D
+  @color
+  M= -1
+  @1
+  D=A 
+  @salto
+  M=D
+  @bool
+  M= 1
+  @VARR
+  0;JMP
 
 (Borrar)
 
-
-@16384
+ @16384
  D=A
-
-@Var
+ @Var
  M=D 
-
-@8300
+ @8192
  D=A
-
-@contador
+ @contador
  M=D
-
-@1
+ @1
  D=A 
-
-@salto
+ @color
+ M= 0
+ @salto
  M=D
-
-@color
-M = 0
-
-@VARI
+ @VARR
  0;JMP
- 
- 
-(Linea2)
 
 
-@20480                
- D=A
-
-@Var
- M=D 
-
-@32
- D=A
-
-@contador
- M=D
-
-@1
- D=A 
- 
-@salto
- M=D
-
-
-@color
-M= -1
- 
-@VARI
-0;JMP
-
-
-(VARI)
-@Var               
+(VARR)
+ @Var               
  D=M
-@Screen
+ @Screen
  M=D 
  
 (Pintar)
-@contador
+ @contador
  D=M 
  
  @FIN
  D;JEQ
  
-@color
-D=M 
-
-@Screen
-A=M 
-M=D 
+ @color
+ D=M 
+ @Screen
+ A=M 
+ M=D 
  
-@contador
-M=M-1
- 
+ @contador
+ M=M-1
 
-@salto
+ @salto
  D=M
  
-@Screen
+ @Screen
  M=M+D 
  
-@Pintar
+ @Pintar
  0;JMP
  
+
 (FIN)
+ @bool
+ D=M
+ @LINEA 2
+ D;JEQ
+
  @INICIO
  0;JMP
